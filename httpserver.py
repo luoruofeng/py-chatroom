@@ -14,6 +14,9 @@ def home():
 def index():
     return render_template("index.html")
 
+@flask_app.route("/test")
+def test():
+    return render_template("test.html")
 
 if __name__ == '__main__':
     flask_app.run("0.0.0.0", 8888)
