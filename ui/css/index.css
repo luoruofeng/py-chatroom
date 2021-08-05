@@ -1,5 +1,27 @@
+body{
+    background-color: #35b0d5;
+}
+
+.container{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.container .content-main{
+    background-color: #35b0d5;
+}
+
+div {
+    background-color: #fff;
+    color: #2787f5;
+}
+
+p{
+    color: #95aac9;
+}
+
 #chat-content-div{
-    min-height: 100px;
+    min-height: 10px;
 }
 
 .bs-callout {
@@ -54,17 +76,35 @@ code, kbd, pre, samp {
     background-color: #ebf1f7!important;
 }
 
+.message-body{
+    max-height: 310px;
+    overflow: auto;
+}
+
 .message-text {
     background: #f6f9fb;
     border-radius: .8rem;
     padding: 1rem 1.25rem;
     color: #95aac9;
 }
+
+.my-message-text {
+    background: #2787f5;
+    border-radius: .8rem;
+    padding: 1rem 1.25rem;
+    color: #fff;
+}
+
 .message-content {
     display: flex;
     align-items: center;
 }
 
 .message-item{
-    padding-bottom: 10px;
+    padding-bottom: 25px;
+}
+
+.message-header{
+    padding-bottom: 4px;
+    font-weight: bold;
 }
