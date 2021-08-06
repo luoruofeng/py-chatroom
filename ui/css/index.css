@@ -78,7 +78,8 @@ code, kbd, pre, samp {
 
 .message-body{
     max-height: 310px;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: auto;
 }
 
 .message-text {
