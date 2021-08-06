@@ -1,4 +1,6 @@
+import threading
 
+from flask import Flask
 from geventwebsocket import WebSocketServer, WebSocketApplication, Resource, WebSocketError
 from collections import OrderedDict
 import json
@@ -55,9 +57,24 @@ class EchoApplication(WebSocketApplication):
 
         print("close")
 
+flask_app = Flask(__name__)
+
+@flask_app.route("/personcount/<roomnum>")
+def personCount(roomnum):
+    if roomnum not in config.rooms:
+        return "0"
+    else:
+        return str(len(config.rooms[roomnum]))
+
+def flask_server_run():
+    flask_app.run(host="0.0.0.0",port="5556")
+
 if __name__ == '__main__':
     config = Config()
+    threading.Thread(target=flask_server_run,args="").start()
     WebSocketServer(
         ('0.0.0.0', 5555),
-        Resource(OrderedDict([('/echo/.*', EchoApplication)]))
+        Resource(OrderedDict([
+            ('/echo/.*', EchoApplication)
+        ]))
     ).serve_forever()

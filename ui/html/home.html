@@ -22,11 +22,35 @@
             <span class="bs-docs-booticon bs-docs-booticon-lg bs-docs-booticon-outline">黑</span>
             <p class="lead">黑盒聊天，匿名，安全，后台不保存任何数据，关闭及焚。</p>
             <p class="lead">
-                <a href="/" class="btn btn-outline-inverse btn-lg" onclick="">创建房间</a>
-                <a href="/" class="btn btn-outline-inverse btn-lg" onclick="">加入房间</a>
+                <a href="/initroom" class="btn btn-outline-inverse btn-lg">创建房间</a>
+                <a onclick="showLogin()" class="btn btn-outline-inverse btn-lg">加入房间</a>
             </p>
           </div>
       </div>
     </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">进入房间</h4>
+      </div>
+      <div class="modal-body">
+          <div class="input-group">
+              <input type="text" id="roomnum-input" class="form-control" placeholder="房间号" aria-describedby="basic-addon1">
+              <input type="text" id="password-input" class="form-control" placeholder="房间密码" aria-describedby="basic-addon1">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" onclick="login()">进入房间</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

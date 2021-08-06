@@ -30,7 +30,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary">修改</button>
+        <button type="button" class="btn btn-primary" onclick="changeNickName()">修改</button>
       </div>
     </div>
   </div>
@@ -41,12 +41,12 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="bs-callout bs-callout-info" id="callout-type-b-i-elems">
-                    <p>房间号码 <input readonly="readonly" id="room-num" value="111111"/>
+                    <p>房间号码 <input readonly="readonly" id="room-num" value="{{roomnum}}"/>
                         <button type="button" onclick="copy_content('room-num')"  class="btn btn-xs" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
                           <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
                         </button>
                     </p>
-                    <p>房间密码 <input readonly="readonly" id="room-password" value="222222"/>
+                    <p>房间密码 <input readonly="readonly" id="room-password" value="{{password}}"/>
                         <button type="button" onclick="copy_content('room-password')" class="btn btn-xs" aria-label="Left Align">
                           <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
                         </button>

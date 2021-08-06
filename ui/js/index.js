@@ -4,16 +4,41 @@ function format(e){
      }
 }
 
+ALL_FONTS="1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+function getRandom(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function createRandomName(){
+    return "Mr."+ALL_FONTS[getRandom(0,ALL_FONTS.length)]
+}
+
 function scrollBottom(){
     $('.message-body').eq(0).animate({ scrollTop: $('.message-body').eq(0).prop("scrollHeight")}, 1000);
 }
 
+function changeName(){
+    $('#myModal').on('show.bs.modal', function () {
+        $("#change-nickname-input").val($("#nick-name").text());
+    })
+}
+
+function changeNickName(){
+    $("#nick-name").text($("#change-nickname-input").val());
+    $('#myModal').modal('hide');//隐藏modal
+    $('.modal-backdrop').remove();//去掉遮罩层
+}
 
 var roomnum = null;
 $(document).ready(function (){
     scrollBottom();
+    $("#nick-name").text(createRandomName());
+    changeName();
+    $("#room-url").val(window.location.href)
     roomnum = $("#room-num").val()
-    alert(roomnum);
     ws = createWebSocket();
 })
 
@@ -81,3 +106,4 @@ function copy_content(id) {
     copyText.select();//选择
     document.execCommand("Copy");//执行复制
 }
+
