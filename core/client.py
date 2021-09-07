@@ -55,5 +55,5 @@ if __name__ == "__main__":
     time.sleep(3)
     c.send(create_message(name=name,type=MessageType.TXT,content="hello!")+EOM)
 
-    time.sleep(13)
+    time.sleep(3)
     c.end()

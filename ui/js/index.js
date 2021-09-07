@@ -39,11 +39,12 @@ $(document).ready(function (){
     changeName();
     $("#room-url").val(window.location.href)
     roomnum = $("#room-num").val()
+    password = $("#room-password").val()
     ws = createWebSocket();
 })
 
 function createWebSocket(){
-    var ws = new WebSocket("ws://127.0.0.1:5555/echo/"+roomnum);
+    var ws = new WebSocket("ws://127.0.0.1:5555/echo/"+roomnum+"/"+password);
 
     ws.onmessage = function (res) {
         console.log(res.data);

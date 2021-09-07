@@ -40,8 +40,10 @@
       </div>
       <div class="modal-body">
           <div class="input-group">
-              <input type="text" id="roomnum-input" class="form-control" placeholder="房间号" aria-describedby="basic-addon1">
-              <input type="text" id="password-input" class="form-control" placeholder="房间密码" aria-describedby="basic-addon1">
+              <form action="/login" method="post" id="login-form">
+                  <input type="text" id="roomnum-input" class="form-control" placeholder="房间号" aria-describedby="basic-addon1" name="roomnum">
+                  <input type="text" id="password-input" class="form-control" placeholder="房间密码" aria-describedby="basic-addon1" name="password">
+              </form>
           </div>
       </div>
       <div class="modal-footer">
