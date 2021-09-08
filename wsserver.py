@@ -63,14 +63,14 @@ class EchoApplication(WebSocketApplication):
         mes_type = message_obj["type"]
         content = message_obj["content"]
         def handleFunc(roomstub):
-            getRoomNumByAddr = roomstub.GetRoomNumByAddr(room_pb2.GetRoomAddrRequest(userId=self.ip,port=self.port))
-            getRoomAddrResponse=roomstub.GetRoomAddr(room_pb2.GetRoomAddrRequest(roomnum=getRoomNumByAddr.roomnum))
+            getRoomNumByAddrResponse = roomstub.GetRoomNumByAddr(room_pb2.GetRoomNumByAddrRequest(userIp=self.ip, port=self.port))
+            getRoomAddrResponse=roomstub.GetRoomAddr(room_pb2.GetRoomAddrRequest(roomnum=getRoomNumByAddrResponse.roomnum))
             userAddrs = getRoomAddrResponse.addr
             return userAddrs
         userAddrs = callRpcMethod(handleFunc)
         for client in userAddrs:
-            if (userAddrs.ip, userAddrs.port) in ADDR_CLIENT:
-                ADDR_CLIENT[(userAddrs.ip, userAddrs.port)].ws.send(json.dumps({
+            if ((client.ip, client.port) in ADDR_CLIENT):
+                ADDR_CLIENT[(client.ip, client.port)].ws.send(json.dumps({
                     'msg_type': mes_type,
                     'nickname': nickname,
                     "content": content
@@ -94,7 +94,7 @@ class EchoApplication(WebSocketApplication):
                 userIp=self.ip,
                 port=self.port
             ))
-            if resp.isSuccess():
+            if resp.isSuccess:
                 del ADDR_CLIENT[(self.ip, self.port)]
         callRpcMethod(handleFunc)
         print("close")

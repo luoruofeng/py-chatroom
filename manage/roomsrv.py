@@ -14,7 +14,7 @@ class Room(room_pb2_grpc.RoomServicer):
 
     def print_count(func):
         def inner(self, *args, **kwargs):
-            print(self)
+            print("start print count:")
             result = func(self, *args, **kwargs)
             print(result)
             print(self.rooms)
@@ -63,26 +63,26 @@ class Room(room_pb2_grpc.RoomServicer):
         addrs = [room_pb2.UserAddr(ip=k, port=v) for k, v in self.rooms[request.roomnum]]
         return room_pb2.GetRoomAddrResponse(addr = addrs)
 
+
     def getRoomNumByAddr(self,ip ,port):
         return self.members[(ip, port)]
 
+    @print_count
     def GetRoomNumByAddr(self, request, context):
-        roomnum = self.getRoomNumByAddr(userIp=request.userIp,port=request.port)
+        roomnum = self.getRoomNumByAddr(ip=request.userIp,port=request.port)
         return room_pb2.GetRoomAddrRequest(roomnum=roomnum)
 
 
     @print_count
     def Leave(self, request, context):
-        print("leave")
         ip,port = request.userIp,request.port
-        roomNum = self.getRoomNumByAddr()
+        roomNum = self.getRoomNumByAddr(ip, port)
         self.members.pop((ip, port))
         self.rooms[roomNum].remove((ip, port))
-
         if len(self.rooms[roomNum]) == 0:
             self.rooms.pop(roomNum)
             self.rooms_pw.pop(roomNum)
-
+        return room_pb2.LeaveRoomResponse(isSuccess=True)
 
     ALL_FONTS = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
