@@ -1,0 +1,13 @@
+version: '3'
+networks:
+  default:
+    external:
+      name: im-network
+
+services:
+  room-service:
+    image: im-roomsrv:v1.0
+  http-service:
+    image: im-httpsrv:v1.0
+  ws-service:
+    image: im-wssrv:v1.0

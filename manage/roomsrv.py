@@ -1,5 +1,6 @@
 import random
 from concurrent import futures
+import argparse
 
 import grpc
 
@@ -95,12 +96,15 @@ class Room(room_pb2_grpc.RoomServicer):
     def run(self):
         s = grpc.server(futures.ThreadPoolExecutor(max_workers=100))
         room_pb2_grpc.add_RoomServicer_to_server(Room(), s)
-        s.add_insecure_port("0.0.0.0:9000")
+        s.add_insecure_port(f"0.0.0.0:{args.port}")
         s.start()
         s.wait_for_termination()
 
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--port", type=int, default=9000)
+    args = parser.parse_args()
     Room().run()
 
