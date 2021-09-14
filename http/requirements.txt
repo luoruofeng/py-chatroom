@@ -1,4 +1,0 @@
-flask==2.0.1
-grpcio
-grpcio-tools
-requests
