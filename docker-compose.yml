@@ -1,13 +1,39 @@
 version: '3'
 networks:
-  default:
-    external:
-      name: im-network
+  frontend:
+    name: im-front
+    driver: bridge
+  backend:
+    name: im-back
+    driver: bridge
 
 services:
-  room-service:
-    image: im-roomsrv:v1.0
-  http-service:
-    image: im-httpsrv:v1.0
-  ws-service:
-    image: im-wssrv:v1.0
+  room:
+    container_name: im-room
+    build: ./manage
+    restart: always
+    networks:
+      - backend
+  http:
+    container_name: im-http
+    build: ./httpsrv
+    networks:
+      - backend
+      - frontend
+    links:
+      - room
+    restart: always
+    ports:
+    - "80:80"
+  ws:
+    container_name: im-ws
+    build: ./ws
+    networks:
+      - backend
+      - frontend
+    restart: always
+    links:
+      - room
+    ports:
+    - "5555:5555"
+

@@ -1,3 +1,4 @@
+#!/bin/sh
 echo 开始构建...
 
 roomc=`docker ps -a | grep im-room`
@@ -55,17 +56,19 @@ if [[ -n $imnet ]];then
   docker network create --driver bridge --subnet 172.22.16.0/24 im-net
 fi
 
-cd ./manage
-docker build -t im-room:v1.0 .
+docker-compose up -d
 
-cd ../httpsrv
-docker build -t im-http:v1.0 .
-
-cd ../ws
-docker build -t im-ws:v1.0 .
-
-docker run --network=im-net --name im-room  -d --restart=always im-room:v1.0 &
-docker run --network=im-net --name im-ws -p 5555:5555  -d --restart=always im-ws:v1.0 &
-docker run --network=im-net --name im-http -p 80:80 -d --restart=always im-http:v1.0 &
+#cd ./manage
+#docker build -t im-room:v1.0 .
+#
+#cd ../httpsrv
+#docker build -t im-http:v1.0 .
+#
+#cd ../ws
+#docker build -t im-ws:v1.0 .
+#
+#docker run --network=im-net --name im-room  -d --restart=always im-room:v1.0 &
+#docker run --network=im-net --name im-ws -p 5555:5555  -d --restart=always im-ws:v1.0 &
+#docker run --network=im-net --name im-http -p 80:80 -d --restart=always im-http:v1.0 &
 
 echo 完成.
