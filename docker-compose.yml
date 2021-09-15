@@ -9,12 +9,14 @@ networks:
 
 services:
   room:
+    image: im-room:v1.0
     container_name: im-room
     build: ./manage
     restart: always
     networks:
       - backend
   http:
+    image: im-http:v1.0
     container_name: im-http
     build: ./httpsrv
     networks:
@@ -26,6 +28,7 @@ services:
     ports:
     - "80:80"
   ws:
+    image: im-ws:v1.0
     container_name: im-ws
     build: ./ws
     networks:
