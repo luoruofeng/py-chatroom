@@ -7,6 +7,7 @@ from protobuf import room_pb2,room_pb2_grpc
 # from flask import Flask
 from geventwebsocket import WebSocketServer, WebSocketApplication, Resource, WebSocketError
 from collections import OrderedDict
+from loguru import logger
 
 class Config:
     def __init__(self):
@@ -23,6 +24,7 @@ ADDR_CLIENT = {}
 class EchoApplication(WebSocketApplication):
     def __init__(self,ws):
         super().__init__(ws)
+        logger.info(f"init echo app.addr={self.ws.handler.active_client.address}")
         self.ip = str(self.ws.handler.active_client.address[0])
         self.port = int(self.ws.handler.active_client.address[1])
 
@@ -48,8 +50,8 @@ class EchoApplication(WebSocketApplication):
 
 
     def on_open(self):
+        logger.info(f"start ws.addr={self.ip} {self.port}")
         self.addToRoom()
-        print("Connection opened")
 
     # def getRoomNumByAddr(self):
     #     return config.members[self.ws.handler.active_client.address]
@@ -61,6 +63,7 @@ class EchoApplication(WebSocketApplication):
         nickname = message_obj["nickname"]
         mes_type = message_obj["type"]
         content = message_obj["content"]
+        logger.info(f"init echo app.addr={self.ws.handler.active_client.address} message={message_obj}")
         def handleFunc(roomstub):
             getRoomNumByAddrResponse = roomstub.GetRoomNumByAddr(room_pb2.GetRoomNumByAddrRequest(userIp=self.ip, port=self.port))
             getRoomAddrResponse=roomstub.GetRoomAddr(room_pb2.GetRoomAddrRequest(roomnum=getRoomNumByAddrResponse.roomnum))
@@ -75,20 +78,9 @@ class EchoApplication(WebSocketApplication):
                     "content": content
                 }))
 
-        # roomNum = self.getRoomNumByAddr()
-        # for client in config.rooms[roomNum]:
-        #     if client and client.ws and message:
-        #         client.ws.send(json.dumps({
-        #             'msg_type': mes_type,
-        #             'nickname': nickname,
-        #             "content" : content
-        #         }))
-
-
     def on_close(self, reason):
         def handleFunc(roomstub):
-            print(self.ip)
-            print(self.port)
+            logger.info(f"close ws.addr={self.ip} {self.port}")
             resp = roomstub.Leave(room_pb2.LeaveRoomRequest(
                 userIp=self.ip,
                 port=self.port
@@ -98,26 +90,15 @@ class EchoApplication(WebSocketApplication):
         callRpcMethod(handleFunc)
         print("close")
 
-# flask_app = Flask(__name__)
-# @flask_app.route("/personcount/<roomnum>")
-# def personCount(roomnum):
-#     if roomnum not in config.rooms:
-#         return "0"
-#     else:
-#         return str(len(config.rooms[roomnum]))
-
-# def flask_server_run():
-#     flask_app.run(host="0.0.0.0",port="5556")
-
 if __name__ == '__main__':
+    logger.add("logs/ws_{time}.log",encoding='utf-8',level='INFO')
     parser = argparse.ArgumentParser()
     parser.add_argument("--port", type=int, default=5555)
     parser.add_argument("--roomip", type=str, default="127.0.0.1")
     parser.add_argument("--roomport", type=int, default=9000)
     args = parser.parse_args()
-
+    logger.info(f"ws server start.args={args}")
     config = Config()
-    # threading.Thread(target=flask_server_run,args="").start()
     WebSocketServer(
         ('0.0.0.0', args.port),
         Resource(OrderedDict([

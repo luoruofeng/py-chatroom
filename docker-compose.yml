@@ -7,6 +7,17 @@ networks:
     name: im-back
     driver: bridge
 
+volumes:
+  wslog:
+    name: wslog
+    driver: local
+  roomlog:
+    name: roomlog
+    driver: local
+  httplog:
+    name: httplog
+    driver: local
+
 services:
   room:
     image: im-room:v1.0
@@ -15,6 +26,8 @@ services:
     restart: always
     networks:
       - backend
+    volumes:
+      - roomlog:/usr/src/app/logs
   http:
     image: im-http:v1.0
     container_name: im-http
@@ -27,6 +40,8 @@ services:
     restart: always
     ports:
     - "80:80"
+    volumes:
+      - httplog:/usr/src/app/logs
   ws:
     image: im-ws:v1.0
     container_name: im-ws
@@ -39,4 +54,6 @@ services:
       - room
     ports:
     - "5555:5555"
+    volumes:
+    - wslog:/usr/src/app/logs
 

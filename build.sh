@@ -1,6 +1,17 @@
 #!/bin/sh
 echo 开始构建...
 
+cd ./manage
+rm -rf logs
+
+cd ../httpsrv
+rm -rf logs
+
+cd ../ws
+rm -rf logs
+
+cd ..
+
 roomc=`docker ps -a | grep im-room`
 httpc=`docker ps -a | grep im-http`
 wsc=`docker ps -a | grep im-ws`
