@@ -1,0 +1,80 @@
+body{
+    background-color: #35b0d5;
+}
+
+.container{
+    text-align: center;
+}
+
+p{
+    color: #ffffff;
+    font-weight: 300;
+    line-height: 1.4;
+    width: 100%;
+    font-size: 30px;
+    margin-top:40px;
+}
+
+.bs-docs-booticon-outline {
+    background-color: transparent;
+    border: 1px solid #28a4c9;
+}
+.bs-docs-booticon-lg {
+    margin: 130px auto;
+    width: 144px;
+    height: 244px;
+    font-size: 108px;
+    line-height: 140px;
+}
+.bs-docs-booticon {
+    margin: 30px auto;
+    display: block;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    cursor: default;
+    background-color: #28a4c9;
+    border-radius: 15%;
+}
+
+
+.btn-outline-inverse {
+    color: #fff;
+    background-color: transparent;
+    border-color: #28a4c9;
+}
+.btn-lg, .btn-group-lg > .btn {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+}
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    user-select: none;
+}
+
+.bs-docs-masthead .lead {
+    width: 80%;
+    font-size: 30px;
+    color: white;
+}
+
+.bs-docs-masthead .lead {
+    margin: 0 auto 30px;
+    font-size: 20px;
+    color: #fff;
+}
+
+p a:hover{
+    background-color: white;
+}
