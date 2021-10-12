@@ -1,4 +1,3 @@
 grpcio
 grpcio-tools
-grpc-tools
 loguru
