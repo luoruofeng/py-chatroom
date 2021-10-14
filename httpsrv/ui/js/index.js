@@ -40,10 +40,27 @@ $(document).ready(function (){
     $("#room-url").val(window.location.href)
     roomnum = $("#room-num").val()
     password = $("#room-password").val()
-    wsip = $("#ws-ip").val()
+    wsip = "ws."+getSecDomain()
     wsport = $("#ws-port").val()
     ws = createWebSocket();
 })
+
+function getSecDomain(){
+    h = window.location.host //ip or domain
+    var re=/^(\d+)\.(\d+)\.(\d+)\.(\d+)$/;//ip正则表达式
+    if(re.test(h))
+    {
+        //is ip
+        return h
+    }else{
+        //is domain
+        h = h.split(".")
+        var newArr = h.filter((val, index, arr) => {
+            return index !== 0;
+        })
+        return newArr.join(".")//return second-level domain
+    }
+}
 
 function createWebSocket(){
     var ws = new WebSocket("ws://"+wsip+":"+wsport+"/echo/"+roomnum+"/"+password);
