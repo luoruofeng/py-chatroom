@@ -40,7 +40,7 @@ $(document).ready(function (){
     $("#room-url").val(window.location.href)
     roomnum = $("#room-num").val()
     password = $("#room-password").val()
-    wsip = "ws."+getSecDomain()
+    wsip = getSecDomain()
     wsport = $("#ws-port").val()
     ws = createWebSocket();
 })
@@ -48,7 +48,7 @@ $(document).ready(function (){
 function getSecDomain(){
     h = window.location.host //ip or domain
     var re=/^(\d+)\.(\d+)\.(\d+)\.(\d+)$/;//ip正则表达式
-    if(re.test(h))
+    if(re.test(h) || h == "localhost")
     {
         //is ip
         return h
@@ -58,7 +58,7 @@ function getSecDomain(){
         var newArr = h.filter((val, index, arr) => {
             return index !== 0;
         })
-        return newArr.join(".")//return second-level domain
+        return "ws."+newArr.join(".")//return second-level domain
     }
 }
 
