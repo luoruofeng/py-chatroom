@@ -121,6 +121,13 @@ function send_msg() {
      window.event.returnValue =false;//阻止表单跳转
 }
 
+function send_submit(e) {
+    if (e.keyCode == 13) {
+        send_msg();
+        return false;
+    }
+}
+
 function copy_content(id) {
     var copyText = $("#"+id);//获取对象
     copyText.select();//选择

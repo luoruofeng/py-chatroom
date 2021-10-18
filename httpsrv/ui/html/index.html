@@ -85,7 +85,8 @@
           <div class="row" style="padding-top:18px;">
             <form class="chat-form rounded-pill bg-dark" style="margin:0px auto;width:96%;display:flex;bottom:10px;"  class="col-md-12" >
                 <div class="input-group" style="background-color: #ebf1f7;width: 95%;margin: 0px auto;"  class="col-md-10" >
-                    <input type="text" style="border:none;" placeholder="请输入..." id="message" class="form-control">
+                    <input type="text" style="border:none;" placeholder="请输入..." id="message" onkeydown="return send_submit(event)" class="form-control">
+                    <input type="text" style="display:none" />
                    <span onclick="send_msg()" style="border:none;cursor: pointer;background-color: #2787f5;color: #fff;" class="input-group-addon">发送</span>
                 </div>
             </form>
