@@ -55,10 +55,10 @@ function getSecDomain(){
     }else{
         //is domain
         h = h.split(".")
-        var newArr = h.filter((val, index, arr) => {
-            return index !== 0;
-        })
-        return "ws."+newArr.join(".")//return second-level domain
+//         var newArr = h.filter((val, index, arr) => {
+//             return index !== 0;
+//         })
+        return "ws."+h.join(".")//return second-level domain
     }
 }
 
