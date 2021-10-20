@@ -15,7 +15,8 @@ cd ..
 #kong konga
 docker stop kong-database kong-migration konga-prepare kong konga  
 docker rm kong-database kong-migration konga-prepare kong konga  
-cd ../kong
+docker network rm kong-net
+cd ./kong
 docker-compose up -d
 cd ..
 
