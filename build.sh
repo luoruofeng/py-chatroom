@@ -12,6 +12,14 @@ rm -rf logs
 
 cd ..
 
+#kong konga
+docker stop kong-database kong-migration konga-prepare kong konga  
+docker rm kong-database kong-migration konga-prepare kong konga  
+cd ../kong
+docker-compose up -d
+cd ..
+
+
 roomc=`docker ps -a | grep im-room`
 httpc=`docker ps -a | grep im-http`
 wsc=`docker ps -a | grep im-ws`
