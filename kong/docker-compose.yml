@@ -3,6 +3,7 @@ version: "3"
 networks:
  kong-net:
   driver: bridge
+  name: kong-net
  
 services:
   #######################################
