@@ -58,7 +58,7 @@ function getSecDomain(){
 //         var newArr = h.filter((val, index, arr) => {
 //             return index !== 0;
 //         })
-        return "ws."+h.join(".")//return second-level domain
+        return (("ws."+h.join(".")).split(":"))[0]//return second-level domain
     }
 }
 
